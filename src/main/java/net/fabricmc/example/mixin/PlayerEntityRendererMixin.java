@@ -1,5 +1,7 @@
 package net.fabricmc.example.mixin;
 
+import java.util.Dictionary;
+
 import org.spongepowered.asm.mixin.Intrinsic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,6 +14,8 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.example.ExampleMod;
+import net.fabricmc.example.PlayerEntityRenderCallback;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.RenderLayer;
@@ -23,29 +27,24 @@ import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.render.VertexFormat.DrawMode;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vector4f;
 
 @Mixin(PlayerEntityRenderer.class)
-public class NiceThirdPersonMixin {
-  public void render(AbstractClientPlayerEntity player, float f, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumerProvider, int lightLevel) {
-    matrices.push();
+public class PlayerEntityRendererMixin {
 
-    var renderer = (PlayerEntityRenderer)(Object)this;
-    var playerRendererInvoker = (PlayerEntityRendererInvoker)renderer;
-    var livingRendererInvoker = (LivingEntityRendererInvoker)renderer;
-    var bodyYaw = player.bodyYaw;
-    var headPitch = player.getPitch();
-
-    var identifier = renderer.getTexture(player);
-    
+  RenderLayer buildLayer(Identifier textureIdentifier) {
     var phaseParams = RenderLayer.MultiPhaseParameters
       .builder()
-      .texture(new RenderPhase.Texture(identifier, false, false))
+      .texture(new RenderPhase.Texture(textureIdentifier, false, false))
       .shader(RenderLayer.ENTITY_TRANSLUCENT_SHADER)
       .transparency(RenderLayer.TRANSLUCENT_TRANSPARENCY)
       .writeMaskState(new RenderPhase.WriteMaskState(true, false))
@@ -54,7 +53,7 @@ public class NiceThirdPersonMixin {
       .build(true);
     
     var renderLayer = RenderLayer.of(
-      "translucent",
+      "entity_translucent",
       VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL,
       DrawMode.QUADS,
       262144,
@@ -62,30 +61,65 @@ public class NiceThirdPersonMixin {
       true,
       phaseParams
     );
-    
+    return renderLayer;
+  }
+
+  PlayerEntityModel<AbstractClientPlayerEntity> setupModel(AbstractClientPlayerEntity player, PlayerEntityRenderer renderer, float tickDelta, MatrixStack matrices) {
+    var playerRendererInvoker = (PlayerEntityRendererInvoker)renderer;
+    var livingRendererInvoker = (LivingEntityRendererInvoker)renderer;
+
+    var bodyYaw = player.bodyYaw;
+    var headPitch = player.getPitch();
     var animationProgress = (float)player.age + tickDelta;
 
-    var vertices = vertexConsumerProvider.getBuffer(renderLayer);
-    var model = renderer.getModel();
+    float scale = 0.9375f;
 
     playerRendererInvoker.invokeSetModelPose(player);
-    model.handSwingProgress = livingRendererInvoker.invokeGetHandSwingProgress(player, tickDelta);
     playerRendererInvoker.invokeSetupTransforms(player, matrices, animationProgress, bodyYaw, tickDelta);
-
-    float scale = 0.9375f;
 
     matrices.scale(-1.0f, -1.0f, 1.0f);
     matrices.translate(0.0, -1.501f, 0.0);
     matrices.scale(scale, scale, scale);
 
+    var model = renderer.getModel();
+
+    model.handSwingProgress = livingRendererInvoker.invokeGetHandSwingProgress(player, tickDelta);
+
     var limbAngle = player.limbAngle;
     var limbDistance = player.limbDistance;
-    var overlay = LivingEntityRenderer.getOverlay(player, 0f);
-
+    
     model.child = false;
     model.animateModel(player, limbAngle, limbDistance, tickDelta);
     model.setAngles(player, limbAngle, limbDistance, animationProgress, 0f, headPitch);
-    model.render(matrices, vertices, lightLevel, overlay, 1, 1, 1, 0.25f);
+
+    return model;
+  }
+
+  Vector4f calculateTint(AbstractClientPlayerEntity player) {
+    if (MinecraftClient.getInstance().player == player)
+      return new Vector4f(1f, 1f, 1f, 0.25f);
+    else
+      return new Vector4f(1f, 1f, 1f, 1f);
+  }
+
+  public void render(AbstractClientPlayerEntity player, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumerProvider, int lightLevel) {
+    matrices.push();
+    var renderer = (PlayerEntityRenderer)(Object)this;
+
+    var renderLayer = buildLayer(renderer.getTexture(player));
+    var model = setupModel(player, renderer, tickDelta, matrices);
+
+    var vertices = vertexConsumerProvider.getBuffer(renderLayer);
+    var overlay = LivingEntityRenderer.getOverlay(player, 0f);
+    var tint = calculateTint(player);
+
+    model.render(
+      matrices,
+      vertices,
+      lightLevel,
+      overlay,
+      tint.getX(), tint.getY(), tint.getZ(), tint.getW()
+    );
 
     matrices.pop();
   }

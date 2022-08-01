@@ -6,6 +6,24 @@ accessible method net/minecraft/client/render/RenderLayer of (Ljava/lang/String;
 accessible class net/minecraft/client/render/RenderLayer$MultiPhaseParameters
 accessible class net/minecraft/client/render/RenderPhase$Transparency
 
+accessible field net/minecraft/client/render/Camera ready Z
+accessible field net/minecraft/client/render/Camera area Lnet/minecraft/world/BlockView;
+accessible field net/minecraft/client/render/Camera focusedEntity Lnet/minecraft/entity/Entity;
+accessible field net/minecraft/client/render/Camera thirdPerson Z
+
+accessible field net/minecraft/client/render/Camera cameraY F
+accessible field net/minecraft/client/render/Camera lastCameraY F
+
+
+accessible field net/minecraft/client/render/Camera yaw F
+accessible field net/minecraft/client/render/Camera pitch F
+
+
+accessible method net/minecraft/client/render/Camera setRotation (FF)V
+accessible method net/minecraft/client/render/Camera setPos (DDD)V
+accessible method net/minecraft/client/render/Camera moveBy (DDD)V
+accessible method net/minecraft/client/render/Camera clipToSpace (D)D
+
 accessible field net/minecraft/client/render/RenderPhase ENTITY_TRANSLUCENT_CULL_SHADER Lnet/minecraft/client/render/RenderPhase$Shader;
 accessible field net/minecraft/client/render/RenderPhase ENTITY_TRANSLUCENT_SHADER Lnet/minecraft/client/render/RenderPhase$Shader;
 

@@ -1,4 +1,4 @@
-# Fabric Example Mod
+# Better Third Person
 
 ## Setup
 
