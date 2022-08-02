@@ -1,9 +1,9 @@
 # Fresh Air
 _Minecraft mod for Fabric_
 
-___v0.0.1-alpha___
+[![](https://modrinth-utils.vercel.app/api/badge/versions?id=xPjiuCVF&logo=true)](https://modrinth.com/mod/fresh-air)
 
-Altered third person controls and view.
+Changing the way you play Minecraft in third person with a set of useful tweaks.
 
 ![Minecraft screenshot of a transparent player, up close](https://u.cubeupload.com/lukeKaalim/screenshotclose.png)
 ![Minecraft screenshot of a transparent player, far off](https://u.cubeupload.com/lukeKaalim/screenshotfar.png)
