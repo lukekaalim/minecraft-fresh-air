@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "fresh_air",
   "version": "${version}",
 
   "name": "Fresh Air",
@@ -8,6 +8,7 @@
   "authors": [
     "Luke Kaalim"
   ],
+  "icon": "assets/fresh_air/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -29,7 +30,7 @@
 
   "custom": {
     "mc-publish": {
-      "modrinth": "AANobbMI"
+      "modrinth": "xPjiuCVF"
     }
   }
 }
