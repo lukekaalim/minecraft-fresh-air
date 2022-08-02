@@ -11,7 +11,6 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
-    steps:
       - uses: Kir-Antipov/mc-publish@v3.1
         with:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
