@@ -1,9 +1,26 @@
-# Better Third Person
+# Fresh Air
+_Minecraft mod for Fabric_
 
-## Setup
+___v0.0.1-alpha___
+
+Altered third person controls and view.
+
+## Features
+ - **Transparent Player Character**. Change the opacity of your character to see more clearly in front of you.
+ - **Mousewheel Zoom**. Instead of scrolling your inventory, in third person the mousewheel controls the distance from you to the camera.
+
+## Roadmap
+ - **Accessibility Menu**. More options to control how fresh air works should be exposed in the accessibility menu.
+ - **Interaction Highlight**. Display the name of what you are currently targeting.
+ - **Target Volume**. Instead of lazer-targeting the object in front of you, cast a wider net for usable entities and present a interactable list for whatever is in front of the player character.
+
+
+## Compatibiliy
+
+This is my first mod, and thus highly experimental. I used relativley invasive methods, so it's likley that this breaks compatibility broadly and randomly.
+
+## Development
+
+### Setup
 
 For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
-
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
