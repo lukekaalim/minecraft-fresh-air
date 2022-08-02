@@ -5,6 +5,10 @@ ___v0.0.1-alpha___
 
 Altered third person controls and view.
 
+![Minecraft screenshot of a transparent player, up close](https://u.cubeupload.com/lukeKaalim/screenshotclose.png)
+![Minecraft screenshot of a transparent player, far off](https://u.cubeupload.com/lukeKaalim/screenshotfar.png)
+
+
 ## Features
  - **Transparent Player Character**. Change the opacity of your character to see more clearly in front of you.
  - **Mousewheel Zoom**. Instead of scrolling your inventory, in third person the mousewheel controls the distance from you to the camera.
