@@ -1,4 +1,4 @@
-package net.fabricmc.fresh_air;
+package com.lukekaalim.mods.fresh_air;
 
 public interface CameraOrbiter {
   void pushCameraDistance(float distance);

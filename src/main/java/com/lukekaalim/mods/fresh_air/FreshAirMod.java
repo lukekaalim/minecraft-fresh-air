@@ -1,4 +1,4 @@
-package net.fabricmc.fresh_air;
+package com.lukekaalim.mods.fresh_air;
 
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;

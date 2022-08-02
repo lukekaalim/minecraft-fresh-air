@@ -1,4 +1,4 @@
-package net.fabricmc.fresh_air.mixin;
+package com.lukekaalim.mods.fresh_air.mixin;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -9,7 +9,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.fabricmc.fresh_air.CameraOrbiter;
+import com.lukekaalim.mods.fresh_air.CameraOrbiter;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.render.Camera;

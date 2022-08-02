@@ -1,4 +1,4 @@
-package net.fabricmc.example;
+package com.lukekaalim.mods.fresh_air;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;

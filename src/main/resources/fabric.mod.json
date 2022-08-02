@@ -13,7 +13,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.fresh_air.FreshAirMod"
+      "com.fabricmc.fresh_air.FreshAirMod"
     ]
   },
   "mixins": [

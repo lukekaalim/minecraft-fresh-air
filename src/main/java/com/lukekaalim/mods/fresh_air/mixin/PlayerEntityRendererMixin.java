@@ -1,4 +1,4 @@
-package net.fabricmc.fresh_air.mixin;
+package com.lukekaalim.mods.fresh_air.mixin;
 
 import java.util.Dictionary;
 
@@ -10,11 +10,11 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.lukekaalim.mods.fresh_air.FreshAirMod;
+import com.lukekaalim.mods.fresh_air.PlayerEntityRenderCallback;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import net.fabricmc.fresh_air.ExampleMod;
-import net.fabricmc.fresh_air.PlayerEntityRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.GameRenderer;
