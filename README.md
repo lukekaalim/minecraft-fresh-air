@@ -1,7 +1,11 @@
-# Fresh Air
+
+# ![Fresh Air Icon](https://u.cubeupload.com/lukeKaalim/icon.png) Fresh Air
+
 _Minecraft mod for Fabric_
 
 [![](https://modrinth-utils.vercel.app/api/badge/versions?id=xPjiuCVF&logo=true)](https://modrinth.com/mod/fresh-air)
+
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/lukekaalim/minecraft-fresh-air?include_prereleases)](https://github.com/lukekaalim/minecraft-fresh-air)
 
 Changing the way you play Minecraft in third person with a set of useful tweaks.
 
