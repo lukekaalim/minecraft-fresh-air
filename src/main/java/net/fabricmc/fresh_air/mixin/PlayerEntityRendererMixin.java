@@ -1,4 +1,4 @@
-package net.fabricmc.example.mixin;
+package net.fabricmc.fresh_air.mixin;
 
 import java.util.Dictionary;
 
@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import net.fabricmc.example.ExampleMod;
-import net.fabricmc.example.PlayerEntityRenderCallback;
+import net.fabricmc.fresh_air.ExampleMod;
+import net.fabricmc.fresh_air.PlayerEntityRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.GameRenderer;

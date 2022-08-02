@@ -1,4 +1,4 @@
-package net.fabricmc.example.mixin;
+package net.fabricmc.fresh_air.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;

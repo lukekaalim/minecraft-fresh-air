@@ -1,8 +1,8 @@
-package net.fabricmc.example.mixin;
+package net.fabricmc.fresh_air.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 
-import net.fabricmc.example.CameraOrbiter;
+import net.fabricmc.fresh_air.CameraOrbiter;
 import net.minecraft.client.render.Camera;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
