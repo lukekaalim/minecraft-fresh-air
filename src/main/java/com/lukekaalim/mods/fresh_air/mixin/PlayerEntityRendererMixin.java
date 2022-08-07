@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.lukekaalim.mods.fresh_air.FreshAirMod;
+import com.lukekaalim.mods.fresh_air.InteractingPlayer;
 import com.lukekaalim.mods.fresh_air.PlayerEntityRenderCallback;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -24,6 +25,7 @@ import net.minecraft.client.render.Shader;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.VertexFormat.DrawMode;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
@@ -37,6 +39,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vector4f;
+import net.minecraft.util.shape.VoxelShapes;
 
 @Mixin(PlayerEntityRenderer.class)
 public class PlayerEntityRendererMixin {
@@ -122,5 +125,15 @@ public class PlayerEntityRendererMixin {
     );
 
     matrices.pop();
+
+    if (player instanceof InteractingPlayer ip) {
+      var lineVertecies = vertexConsumerProvider.getBuffer(RenderLayer.getLines());
+      var im = ip.getInteractionManager();
+      var box = im.CreateInteractionBox();
+      var shape = VoxelShapes.cuboid(box);
+  
+      //WorldRenderer.drawCuboidShapeOutline(matrices, lineVertecies, shape, 0, 0, 0, 0, 0, 0, 0.5f);
+  
+    }
   }
 }

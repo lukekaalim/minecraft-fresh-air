@@ -3,6 +3,7 @@ package com.lukekaalim.mods.fresh_air.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 
 import com.lukekaalim.mods.fresh_air.CameraOrbiter;
+import com.lukekaalim.mods.fresh_air.FreshAirMod;
 
 import net.minecraft.client.render.Camera;
 import net.minecraft.entity.Entity;
@@ -15,9 +16,21 @@ import net.minecraft.world.BlockView;
 public class CameraMixin implements CameraOrbiter {
   public float CAMERA_DISTANCE = 4.0f;
 
+  public float yaw = 0f;
+  public float pitch = 0f;
+
   @Override
   public void pushCameraDistance(float distance) {
     CAMERA_DISTANCE += distance;
+  }
+  @Override
+  public void rotateCamera(float yaw, float pitch) {
+    this.yaw += yaw;
+    this.pitch += pitch;
+  }
+  @Override
+  public float getCameraYaw() {
+    return this.yaw;
   }
 
   public void update(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta) {
@@ -27,7 +40,7 @@ public class CameraMixin implements CameraOrbiter {
     camera.area = area;
     camera.focusedEntity = focusedEntity;
     camera.thirdPerson = thirdPerson;
-    camera.setRotation(focusedEntity.getYaw(tickDelta), focusedEntity.getPitch(tickDelta));
+    camera.setRotation(yaw, pitch);
     camera.setPos(
       MathHelper.lerp(
         (double)tickDelta,
