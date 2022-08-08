@@ -3,7 +3,6 @@ package com.lukekaalim.mods.fresh_air.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 
 import com.lukekaalim.mods.fresh_air.CameraOrbiter;
-import com.lukekaalim.mods.fresh_air.FreshAirMod;
 
 import net.minecraft.client.render.Camera;
 import net.minecraft.entity.Entity;

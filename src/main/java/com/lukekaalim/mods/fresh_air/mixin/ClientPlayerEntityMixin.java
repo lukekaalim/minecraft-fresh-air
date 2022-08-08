@@ -1,6 +1,5 @@
 package com.lukekaalim.mods.fresh_air.mixin;
 
-import java.util.Vector;
 import mikera.vectorz.*;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,9 +13,6 @@ import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.injection.At;
 
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.util.math.Vector2f;
-import net.minecraft.client.util.math.Vector3d;
 
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {

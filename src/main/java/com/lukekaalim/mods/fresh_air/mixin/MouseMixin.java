@@ -27,14 +27,14 @@ public class MouseMixin {
 
   @Inject(method = "onMouseScroll", at = @At("HEAD"), cancellable = true)
   public void onMouseScroll(long window, double horizontal, double vertical, CallbackInfo ci) {
-    var clientWindowHandle = MinecraftClient.getInstance().getWindow().getHandle();
+    var clientWindowHandle = client.getWindow().getHandle();
     var isMouseScrollInMinecraftWindow = window == clientWindowHandle;
-    var player = this.client.player;
-    var inOverlayMenu = this.client.getOverlay() != null;
-    var inScreen = this.client.currentScreen != null;
+    var player = client.player;
+    var inOverlayMenu = client.getOverlay() != null;
+    var inScreen = client.currentScreen != null;
     if (isMouseScrollInMinecraftWindow && player != null && !inOverlayMenu && !inScreen) {
-      var scaledVerticalScroll = (this.client.options.getDiscreteMouseScroll().getValue() != false ? Math.signum(vertical) : vertical) * this.client.options.getMouseWheelSensitivity().getValue();
-      var camera = this.client.gameRenderer.getCamera();
+      var scaledVerticalScroll = (client.options.getDiscreteMouseScroll().getValue() != false ? Math.signum(vertical) : vertical) * this.client.options.getMouseWheelSensitivity().getValue();
+      var camera = client.gameRenderer.getCamera();
       var orbiter = (CameraOrbiter)camera;
       orbiter.pushCameraDistance((float)scaledVerticalScroll);
       ci.cancel();
@@ -49,7 +49,7 @@ public class MouseMixin {
     )
   )
   public void onChangeLookDirection(ClientPlayerEntity changedEntity, double x, double y) {
-    var camera = MinecraftClient.getInstance().gameRenderer.getCamera();
+    var camera = client.gameRenderer.getCamera();
     if (camera instanceof CameraOrbiter orbiter) {
       orbiter.rotateCamera((float)x * 0.15f, (float)y * 0.15f);
     }
