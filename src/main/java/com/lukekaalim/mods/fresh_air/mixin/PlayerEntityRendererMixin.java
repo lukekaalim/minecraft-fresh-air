@@ -100,7 +100,7 @@ public class PlayerEntityRendererMixin {
 
   Vector4f calculateTint(AbstractClientPlayerEntity player) {
     if (MinecraftClient.getInstance().player == player)
-      return new Vector4f(1f, 1f, 1f, 0.25f);
+      return new Vector4f(1f, 1f, 1f, 0.8f);
     else
       return new Vector4f(1f, 1f, 1f, 1f);
   }
@@ -129,8 +129,8 @@ public class PlayerEntityRendererMixin {
     if (player instanceof InteractingPlayer ip) {
       var lineVertecies = vertexConsumerProvider.getBuffer(RenderLayer.getLines());
       var im = ip.getInteractionManager();
-      var box = im.CreateInteractionBox();
-      var shape = VoxelShapes.cuboid(box);
+      //var box = im.CreateInteractionBox(tickDelta);
+      //var shape = VoxelShapes.cuboid(box);
   
       //WorldRenderer.drawCuboidShapeOutline(matrices, lineVertecies, shape, 0, 0, 0, 0, 0, 0, 0.5f);
   

@@ -3,6 +3,7 @@ package com.lukekaalim.mods.fresh_air.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 
 import com.lukekaalim.mods.fresh_air.CameraOrbiter;
+import com.lukekaalim.mods.fresh_air.FreshAirMod;
 
 import net.minecraft.client.render.Camera;
 import net.minecraft.entity.Entity;
@@ -30,6 +31,15 @@ public class CameraMixin implements CameraOrbiter {
   @Override
   public float getCameraYaw() {
     return this.yaw;
+  }
+  @Override
+  public void setCameraYaw(float yaw) {
+    this.yaw += yaw;
+  }
+  @Override
+  public void setCameraPitch(float pitch) {
+    FreshAirMod.LOGGER.info("Pitch: " + pitch);
+    this.pitch += pitch;
   }
 
   public void update(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta) {

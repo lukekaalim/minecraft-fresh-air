@@ -5,5 +5,8 @@ public interface CameraOrbiter {
 
   void rotateCamera(float yaw, float pitch);
 
+  void setCameraYaw(float yaw);
+  void setCameraPitch(float pitch);
+
   float getCameraYaw();
 }

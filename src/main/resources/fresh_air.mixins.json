@@ -13,7 +13,9 @@
     "ClientPlayerEntityMixin",
     "PlayerEntityRendererMixin",
     "PlayerEntityRendererInvoker",
-    "LivingEntityRendererInvoker"
+    "LivingEntityRendererInvoker",
+    "MidnightInputMixin",
+    "MinecraftClientMixin"
   ],
   "server": [],
   "injectors": {

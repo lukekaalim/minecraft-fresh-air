@@ -19,6 +19,7 @@ public interface WorldRenderable {
 
   public class WorldRenderContext {
     public VertexConsumerProvider vertexProvider;
+    public VertexConsumerProvider outlineVertexProvider;
     public Camera camera;
     public GameRenderer gameRenderer;
     public MatrixStack matrices;

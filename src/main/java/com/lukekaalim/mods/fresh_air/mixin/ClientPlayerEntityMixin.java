@@ -13,6 +13,7 @@ import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.injection.At;
 
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.util.math.MathHelper;
 
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {
@@ -34,12 +35,12 @@ public class ClientPlayerEntityMixin {
     if (camera instanceof CameraOrbiter orbiter) {
       var cameraAngleDegrees = orbiter.getCameraYaw();
 
-      var angleDegrees = (angleRadians * 180 / Math.PI) - 90 + cameraAngleDegrees;
-  
+      var angleDegrees = (float)(angleRadians * 180 / Math.PI) - 90 + cameraAngleDegrees;
+      
       if (mag > 0) {
-        player.setYaw((float)angleDegrees);
-        player.lastRenderYaw = (float)angleDegrees;
+        player.setYaw(angleDegrees);
       }
+      player.bodyYaw = MathHelper.lerp(0.001f, (float)player.bodyYaw, angleDegrees);
   
       player.sidewaysSpeed = 0;
       player.forwardSpeed = (float)mag;

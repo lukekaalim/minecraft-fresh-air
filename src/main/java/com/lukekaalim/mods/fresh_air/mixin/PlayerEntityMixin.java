@@ -28,4 +28,9 @@ public abstract class PlayerEntityMixin implements InteractingPlayer {
   public PlayerInteractionManager getInteractionManager() {
     return playerInteractionManager;
   }
+
+  @Override
+  public PlayerEntity getSelf() {
+    return (PlayerEntity)(Object)this;
+  }
 }

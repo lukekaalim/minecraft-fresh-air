@@ -5,6 +5,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.lukekaalim.mods.fresh_air.InteractingPlayer;
 import com.lukekaalim.mods.fresh_air.PlayerInteractionManager;
+import com.lukekaalim.mods.fresh_air.VectorUtils;
+import com.lukekaalim.mods.interactions.BlockTarget;
+import com.lukekaalim.mods.interactions.EntityTarget;
 
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -29,21 +32,17 @@ public class GameRendererMixin {
     var clientCamera = client.cameraEntity;
     if (clientCamera instanceof InteractingPlayer player) {
       PlayerInteractionManager im = player.getInteractionManager();
-      var entities = im.CalculateInteractableEntities();
-      var blocks = im.CalculateTargetedBlock();
-      if (entities.size() > 0) {
-        var firstEntity = entities.get(0);
-        client.crosshairTarget = new EntityHitResult(firstEntity);
-        client.targetedEntity = firstEntity;
-      } else {
+      im.Tick();
+      var target = im.GetDefaultTarget();
+      if (target == null) {
+        client.crosshairTarget = BlockHitResult.createMissed(new Vec3d(0, 0, 0), Direction.UP, im.player.getBlockPos());
         client.targetedEntity = null;
-        if (blocks.size() > 0) {
-          var blockPos = blocks.get(0);
-          var blockVec = new Vec3d(blockPos.getX(), blockPos.getY(), blockPos.getZ());
-          client.crosshairTarget = new BlockHitResult(blockVec, Direction.UP, blockPos, true);
-
+      } else {
+        client.crosshairTarget = target.Hit();
+        if (target instanceof EntityTarget entityTarget) {
+          client.targetedEntity = entityTarget.entity;
         } else {
-          client.crosshairTarget = BlockHitResult.createMissed(new Vec3d(0, 0, 0), Direction.UP, im.player.getBlockPos());
+          client.targetedEntity = null;
         }
       }
     }

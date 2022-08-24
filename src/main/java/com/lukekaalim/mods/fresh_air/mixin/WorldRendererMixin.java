@@ -35,14 +35,24 @@ public class WorldRendererMixin {
     CallbackInfo ci
   ) {
     var context = new WorldRenderable.WorldRenderContext();
+    context.outlineVertexProvider = bufferBuilders.getOutlineVertexConsumers();
     context.vertexProvider = bufferBuilders.getEntityVertexConsumers();
     context.matrices = matrices;
     context.camera = camera;
     context.gameRenderer = gameRenderer;
+    context.tickDelta = tickDelta;
+
+    var cameraPos = camera.getPos();
+    
+    
+    matrices.push();
+    matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
     
     for (var entry : WorldRenderable.RENDERABLES.entrySet()) {
       var renderable = entry.getValue();
       renderable.PrepareRender(context);
     }
+
+    matrices.pop();
   }
 }

@@ -17,6 +17,7 @@
     ]
   },
   "mixins": [
+    "rendering_hooks.mixins.json",
     "fresh_air.mixins.json"
   ],
   "accessWidener": "fresh_air.accesswidener",
@@ -31,7 +32,8 @@
 
   "custom": {
     "mc-publish": {
-      "modrinth": "xPjiuCVF"
+      "modrinth": "xPjiuCVF",
+      "quilt": true
     }
   }
 }
